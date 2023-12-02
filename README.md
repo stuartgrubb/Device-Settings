@@ -2,7 +2,7 @@
 A PowerShell script that configures your desired audio and mouse settings in Windows.
 
 ## Preview
-![image]( https://i.imgur.com/fVnNCEH.png)
+![image](https://i.imgur.com/4D7GuCn.png)
 
 ## Required PowerShell Module
 [AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets) is required for checking and configuring audio device settings.
