@@ -1,8 +1,8 @@
 # Device Settings - Checks audio and mouse configuration in Windows and applies your desired settings.
 # V1.0.0 - 02/12/2023
 
-# The AudioDeviceCmdlets module is required for checking and configuring audio device settings. This module will be installed on the first run. https://github.com/frgnca/AudioDeviceCmdlets
-
+# The AudioDeviceCmdlets module is required for checking and configuring audio device settings. https://github.com/frgnca/AudioDeviceCmdlets  
+# To install this module the script must be run as Administrator for the first time it is launched.
 
 ###########################################################################
 ### Enter the desired devices/settings:
@@ -28,10 +28,11 @@ Function AudioDeviceCmdlets {
 
     ### Check AudioDeviceCmdlets Module is installed
     $Module = "AudioDeviceCmdlets"
+    Import-Module -Name $Module
     IF (Get-Module -Name $Module) {
         
         # Get installed version number
-        $InstalledVersion = Get-Module -Name $Module| Select-Object -ExpandProperty Version
+        $InstalledVersion = Get-Module -Name $Module | Select-Object -ExpandProperty Version
         # Get latest version number
         $LatestVersion = Find-Module -Name $Module | Select-Object -ExpandProperty Version
 
@@ -41,16 +42,39 @@ Function AudioDeviceCmdlets {
             $Response = Read-Host "A new version of $Module is available. Would you like to install? Y/N"
             IF ($Response -eq "Y") {
 
-                Update-Module -Name $Module
+                try {
+
+                    Update-Module -Name $Module
+
+                }
+                catch {
+
+                    Write-Host $Error[0] -ForeGroundColor Red
+                    Write-Output "Press any key to end the script..."
+                    $Host.UI.RawUI.ReadKey("NoEcho, IncludeKeyDown") | Out-Null
+                    Exit
+
+                }
 
             }
 
         }
     } ELSE {
         
-        Write-Host "Module $Module not found. Installing..."
-        Install-Module -Name $Module
+        Write-Host "Module $Module not found. Attempting to install..."
+        try {
 
+            Install-Module -Name $Module
+
+        } catch {
+            
+            Write-Host $Error[0] -ForeGroundColor Red
+            Write-Output "Press any key to end the script..."
+            $Host.UI.RawUI.ReadKey("NoEcho, IncludeKeyDown") | Out-Null
+            Exit
+
+        }
+        
     }
 
 }
@@ -247,3 +271,6 @@ AudioInputSettings
 AudioOutputSettings
 MouseAcceleration
 MousePointerSpeed
+
+Write-Output "`nChecks complete. Press any key to close..."
+$Host.UI.RawUI.ReadKey("NoEcho, IncludeKeyDown") | Out-Null
