@@ -88,7 +88,7 @@ Function AudioOutputSettings {
     Write-Host "`nChecking Audio Output Settings..."
     # Check if the desired device is set as the default audio device
     $PlaybackDevice = Get-AudioDevice -list | Where-Object {$_.Name -eq $AudioOutput} | Select-Object Index, Name, Default, DefaultCommunication
-    $PlaybackDevice | Format-List
+    $PlaybackDevice | Select-Object Name, Default, DefaultCommunication | Format-List
     IF ($PlaybackDevice.Default -match "False") {
 
         $Response = $(Write-Host $AudioOutput "is not the default playback device. Set this as default? Y/N: " -ForegroundColor Yellow -NoNewLine; Read-Host)
@@ -142,7 +142,7 @@ Function AudioInputSettings {
     Write-Host "`nChecking Audio Input Settings..."
     # Check if the desired device is set as the default recording device
     $RecordingDevice = Get-AudioDevice -list | Where-Object {$_.Name -eq $Microphone} | Select-Object Index, Name, Default, DefaultCommunication
-    $RecordingDevice | Format-List
+    $RecordingDevice | Select-Object Name, Default, DefaultCommunication | Format-List
     IF ($RecordingDevice.Default -match "False") {
 
         $Response = $(Write-Host $Microphone "is not the default recording device. Set this as default? Y/N: " -ForegroundColor Yellow -NoNewLine; Read-Host)
