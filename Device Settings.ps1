@@ -95,7 +95,7 @@ Function AudioOutputSettings {
         IF ($Response -eq "Y") {
 
             Set-AudioDevice $PlaybackDevice.Index -DefaultOnly | Out-Null
-            Get-AudioDevice -index $PlaybackDevice.Index | Select-Object Index, Name, Default, DefaultCommunication | Format-List
+            Get-AudioDevice -index $PlaybackDevice.Index | Select-Object Name, Default, DefaultCommunication | Format-List
 
         }
 
@@ -107,7 +107,7 @@ Function AudioOutputSettings {
         IF ($Response -eq "Y") {
 
             Set-AudioDevice $PlaybackDevice.Index -CommunicationOnly | Out-Null
-            Get-AudioDevice -index $PlaybackDevice.Index | Select-Object Index, Name, Default, DefaultCommunication | Format-List
+            Get-AudioDevice -index $PlaybackDevice.Index | Select-Object Name, Default, DefaultCommunication | Format-List
 
         } 
 
@@ -149,7 +149,7 @@ Function AudioInputSettings {
         IF ($Response -eq "Y") {
 
             Set-AudioDevice $RecordingDevice.Index -DefaultOnly | Out-Null
-            Get-AudioDevice -index $RecordingDevice.Index | Select-Object Index, Name, Default, DefaultCommunication | Format-List
+            Get-AudioDevice -index $RecordingDevice.Index | Select-Object Name, Default, DefaultCommunication | Format-List
 
         }
 
@@ -161,7 +161,7 @@ Function AudioInputSettings {
         IF ($Response -eq "Y") {
 
             Set-AudioDevice $RecordingDevice.Index -CommunicationOnly | Out-Null
-            Get-AudioDevice -index $RecordingDevice.Index | Select-Object Index, Name, Default, DefaultCommunication | Format-List
+            Get-AudioDevice -index $RecordingDevice.Index | Select-Object Name, Default, DefaultCommunication | Format-List
 
         } 
 
